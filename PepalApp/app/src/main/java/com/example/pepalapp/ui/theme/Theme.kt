@@ -12,7 +12,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 var customColor = false
 
 private val DarkColorPalette = darkColors(
-    primary = Orange, // Couleurs UI
+    primary = Blue300, // Couleurs UI
     primaryVariant = Purple700,
     secondary = Purple200,
 
@@ -20,7 +20,7 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Orange,
+    primary = Blue300,
     primaryVariant = Teal200,
     secondary = Teal200,
 

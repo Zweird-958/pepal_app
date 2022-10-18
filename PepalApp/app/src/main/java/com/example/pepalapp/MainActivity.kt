@@ -71,26 +71,6 @@ fun DefaultPreview() {
 */
 
 
-@Composable
-fun SimpleButton(label: String) {
-    var textChange by remember {
-        mutableStateOf("no click")
-    }
-    //TextWithSize(textChange,40.sp)
-    Button(onClick = {
-        textChange = "clicked"
-    },
-        contentPadding = PaddingValues(
-        start = 20.dp,
-        top = 12.dp,
-        end = 20.dp,
-        bottom = 12.dp
-    )
-    ){
-        Text(text = label)
-    }
-}
-
 
 
 @Composable

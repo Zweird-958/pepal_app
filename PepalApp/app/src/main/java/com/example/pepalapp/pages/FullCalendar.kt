@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Button
+import androidx.compose.material.ListItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -17,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -32,7 +35,7 @@ import java.util.Date
 @Composable
 fun FullCalendarScaffold(navController: NavHostController){
     Scaffold(
-        topBar = { TopBar(navController) },
+        topBar = { TopBar(navController, "Calendar") },
         content = {
             FullCalendar()
         },
@@ -40,22 +43,32 @@ fun FullCalendarScaffold(navController: NavHostController){
     )
 }
 
-var test: MutableList<Unit> = mutableListOf()
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FullCalendar(){
 
-    test = mutableListOf()
-
+    val test = remember { mutableStateOf(true) }
     Column(modifier = Modifier
         .fillMaxSize()) {
 
-        TitleText("Calendar")
+        //TitleText("Calendar")
+
+        Row(modifier = Modifier
+            .padding(start = 20.dp, top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,) {
+
+            Text(text = "Entreprise :")
+            CheckBoxOnOff(stockVal = test)
+
+        }
+
+
 
         LazyColumn(
             modifier = Modifier
-                .padding(top = 20.dp, start = 20.dp , end = 20.dp, bottom = 40.dp)
+                .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 40.dp)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -64,8 +77,10 @@ fun FullCalendar(){
             val dateFormat = SimpleDateFormat("yyyy-M-dd")
             val currentDate = dateFormat.format(Date())
 
+
             items(dataCalendar.size) { index ->
                 val cours = dataCalendar[index]
+                println(cours)
                 var cardText:List<String> = listOf()
 
                 if (cours["Début"]?.contains("T") == true){
@@ -90,15 +105,24 @@ fun FullCalendar(){
                                     }
                                 }
                             }
-                            test += CardWithMultipleViews(cardText)
+                            if (cours["Matière"] == "Entreprise"){
+                                if (test.value){
+                                    CardWithMultipleViews(cardText)
+                                }
+                            }
+                            else{
+                                CardWithMultipleViews(cardText)
+                            }
+
                         }
                     }
                 }
 
             }
 
-            println("================")
-            println(test.size)
+            /*println(test)
+            println(compteur)*/
+            //test = mutableListOf()
 
         }
     }

@@ -1,17 +1,15 @@
 package com.example.pepalapp.uifun
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.pepalapp.pages.*
 import com.example.pepalapp.ui.theme.Green
+import org.jsoup.internal.StringUtil.padding
 import org.jsoup.select.Elements
+import java.lang.reflect.Modifier
 
 
 @Composable
@@ -157,4 +155,38 @@ fun logoutButton(baseText: String, navController: NavHostController) {
     ) {
         Text(baseText, color = Color.White)
     }
+}
+
+@Composable
+fun SimpleButton(label: String, stockVal: MutableState<Boolean>) {
+    var textChange by remember {
+        mutableStateOf("no click")
+    }
+    //TextWithSize(textChange,40.sp)
+    Button(onClick = {
+        textChange = "clicked"
+        stockVal.value = !stockVal.value
+    },
+        contentPadding = PaddingValues(
+            start = 20.dp,
+            top = 12.dp,
+            end = 20.dp,
+            bottom = 12.dp
+        )
+    ){
+        Text(text = label)
+    }
+}
+
+@Composable
+fun CheckBoxOnOff(stockVal: MutableState<Boolean>) {
+    val checkedState = remember { mutableStateOf(true) }
+    Checkbox(
+        checked = checkedState.value,
+        onCheckedChange = {
+            checkedState.value = it
+            stockVal.value = !stockVal.value
+                          },
+        colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
+    )
 }

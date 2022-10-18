@@ -265,6 +265,7 @@ fun allCalendar(){
             }
 
         }
+        dataCalendar.sortBy { it["Début"] }
     }.start()
 }
 
@@ -480,6 +481,6 @@ fun connection(navController: NavHostController){
     else{
         MakeToast(label = "Erreur")
     }
-    Thread.sleep(100)
+    Thread.sleep(200)
 
 }

@@ -36,7 +36,7 @@ fun CardWithMultipleViews(cardText: List<String>) {
     val paddingModifier = Modifier.padding(10.dp)
     Card(
         elevation = 10.dp,
-        border = BorderStroke(1.dp, Orange),
+        border = BorderStroke(1.dp, MaterialTheme.colors.primary),
 
         modifier = Modifier.fillMaxWidth()
     ) {

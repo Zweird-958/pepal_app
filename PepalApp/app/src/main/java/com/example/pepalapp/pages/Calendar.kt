@@ -43,7 +43,7 @@ fun CalendarScaffold(navController: NavHostController){
 @Composable
 fun Calendar(navController: NavHostController){
 
-    TitleText("Calendar")
+    TitleText("Emploi du Temps")
     
     Column(
         modifier = Modifier
@@ -117,7 +117,7 @@ fun Calendar(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(25.dp))
 
-        calendarButton(baseText = "FULL EDT", navController = navController)
+        calendarButton(baseText = "VOIR PLUS", navController = navController)
 
     }
 }

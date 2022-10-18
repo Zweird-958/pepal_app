@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -46,7 +47,7 @@ fun Account(navController: NavHostController){
             //Spacer(Modifier.height(40.dp))
             RoundCornerImageViewWithUrl(usernameImage,128.dp,2.5.dp)
             Spacer(Modifier.height(15.dp))
-            Text(text = name, color = Color.White)
+            Text(text = name, color = Color.White, fontWeight = FontWeight.Bold)
             //Spacer(Modifier.height(40.dp))
         }
 
@@ -82,7 +83,7 @@ fun Account(navController: NavHostController){
             Divider(modifier = Modifier.padding(end = 230.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[3], size = 15.sp)
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
             logoutButton(baseText = "Déconnexion", navController = navController)
 

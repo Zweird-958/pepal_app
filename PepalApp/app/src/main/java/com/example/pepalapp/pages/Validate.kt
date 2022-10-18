@@ -43,8 +43,7 @@ fun ValidateScaffold(navController: NavHostController){
 @Composable
 fun Validate(navController: NavHostController){
 
-    TitleText("Validate")
-    
+    TitleText("Présence")
     Column(
         modifier = Modifier
             .padding(15.dp)
@@ -80,7 +79,7 @@ fun Validate(navController: NavHostController){
         
         Spacer(modifier = Modifier.height(25.dp))
 
-        refreshButton(baseText = "REFRESH", navController = navController)
+        refreshButton(baseText = "RAFRAICHIR", navController = navController)
 
     }
 }

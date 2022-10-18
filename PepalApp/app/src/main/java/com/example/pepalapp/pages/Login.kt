@@ -47,20 +47,20 @@ fun Login(navController: NavHostController){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleText("Login")
+        TitleText("Connexion")
 
         Spacer(modifier = Modifier.height(25.dp))
 
-        LabelAndStock(yourLabel = "Username",option = KeyboardType.Text, icon = Icons.Default.AccountBox,
+        LabelAndStock(yourLabel = "Identifiant",option = KeyboardType.Text, icon = Icons.Default.AccountBox,
             description = "usernameicon",username, listOf(AutofillType.Username))
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        LabelAndStockPass(yourLabel = "Password", icon = Icons.Default.Lock,
+        LabelAndStockPass(yourLabel = "Mot de Passe", icon = Icons.Default.Lock,
             description = "passicon",password, listOf(AutofillType.Password))
 
         Spacer(modifier = Modifier.height(25.dp))
 
-        loginButton("LOGIN", listStock, navController)
+        loginButton("Connexion", listStock, navController)
     }
 }

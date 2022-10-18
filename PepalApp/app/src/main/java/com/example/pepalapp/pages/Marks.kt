@@ -32,7 +32,7 @@ fun MarksScaffold(navController: NavHostController){
 @Composable
 fun Marks(){
     
-    TitleText("Marks")
+    TitleText("Notes")
 
 
 
@@ -63,19 +63,6 @@ fun Marks(){
                 CardWithMultipleViews(cardText)
             }
         }
-
-        dataAllNotes?.let {
-            items(it.size){ index ->
-                val note = dataAllNotes!![index]
-                val info = note.select("td")
-                val infoName = "Matière : "+info[0].text()
-                val infoDate = "Date : "+info[2].text()
-                val infoNote = "Note : "+info[3].text()
-                val cardText:List<String> = listOf(infoName,infoDate,infoNote)
-                CardWithMultipleViews(cardText)
-            }
-        }
-
 
     }
 }
