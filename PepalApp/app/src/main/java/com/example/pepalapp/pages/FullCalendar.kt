@@ -40,9 +40,13 @@ fun FullCalendarScaffold(navController: NavHostController){
     )
 }
 
+var test: MutableList<Unit> = mutableListOf()
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FullCalendar(){
+
+    test = mutableListOf()
 
     Column(modifier = Modifier
         .fillMaxSize()) {
@@ -51,7 +55,7 @@ fun FullCalendar(){
 
         LazyColumn(
             modifier = Modifier
-                .padding(15.dp)
+                .padding(top = 20.dp, start = 20.dp , end = 20.dp, bottom = 40.dp)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -86,12 +90,16 @@ fun FullCalendar(){
                                     }
                                 }
                             }
-                            CardWithMultipleViews(cardText)
+                            test += CardWithMultipleViews(cardText)
                         }
                     }
                 }
 
             }
+
+            println("================")
+            println(test.size)
+
         }
     }
 }

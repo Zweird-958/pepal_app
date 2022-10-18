@@ -60,11 +60,11 @@ fun Card(cardText: String) {
         border = BorderStroke(1.dp, MaterialTheme.colors.primary),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            //modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.Start,
 
         ) {
-            TextWithSize(cardText,30.sp)
+            TextWithSize(cardText,20.sp)
         }
     }
 }

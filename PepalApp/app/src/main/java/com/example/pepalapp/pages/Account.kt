@@ -1,14 +1,18 @@
 package com.example.pepalapp.pages
 
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,22 +59,27 @@ fun Account(navController: NavHostController){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+
             TextWithSize(label = "Adresse", size = 20.sp)
+            Divider(modifier = Modifier.padding(end = 290.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[0], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "Mobile", size = 20.sp)
+            Divider(modifier = Modifier.padding(end = 300.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[2], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "E-mail personnelle", size = 20.sp)
+            Divider(modifier = Modifier.padding(end = 200.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[1], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "E-mail scolaire", size = 20.sp)
+            Divider(modifier = Modifier.padding(end = 230.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[3], size = 15.sp)
 
             Spacer(modifier = Modifier.height(30.dp))

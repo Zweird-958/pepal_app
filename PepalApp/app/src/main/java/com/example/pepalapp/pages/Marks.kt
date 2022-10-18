@@ -36,21 +36,33 @@ fun Marks(){
 
 
 
-    Column(Modifier.fillMaxWidth(),
+    Column(Modifier.fillMaxWidth().padding(top = 100.dp, end = 20.dp),
     horizontalAlignment = Alignment.End ) {
-        Spacer(modifier = Modifier.height(30.dp))
-        Text("Moyenne : ${roundWithTwo(avg)}", fontSize = 15.sp)
+
+        Text("Moyenne : ${roundWithTwo(avg)}", fontSize = 17.sp)
     }
 
 
 
     LazyColumn(
         modifier = Modifier
-            .padding(15.dp)
+            .padding(top = 150.dp, bottom = 45.dp, start = 20.dp , end = 20.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        dataAllNotes?.let {
+            items(it.size){ index ->
+                val note = dataAllNotes!![index]
+                val info = note.select("td")
+                val infoName = "Matière : "+info[0].text()
+                val infoDate = "Date : "+info[2].text()
+                val infoNote = "Note : "+info[3].text()
+                val cardText:List<String> = listOf(infoName,infoDate,infoNote)
+                CardWithMultipleViews(cardText)
+            }
+        }
 
         dataAllNotes?.let {
             items(it.size){ index ->
