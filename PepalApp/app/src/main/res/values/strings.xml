@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Pepal App</string>
+    <string name="userData">Test</string>
+    <string name="preference_file_key" />
+</resources>
