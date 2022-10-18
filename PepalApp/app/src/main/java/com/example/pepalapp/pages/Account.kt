@@ -8,11 +8,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.pepalapp.ui.theme.Blue300
+import com.example.pepalapp.ui.theme.customColor
 import com.example.pepalapp.uifun.*
 
 @Composable
@@ -29,9 +31,7 @@ fun AccountScaffold(navController: NavHostController){
 @Composable
 fun Account(navController: NavHostController){
 
-    //TitleText("Account")
-
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()) {
 
         Column(modifier = Modifier
             .background(color = Blue300)
@@ -42,30 +42,38 @@ fun Account(navController: NavHostController){
             //Spacer(Modifier.height(40.dp))
             RoundCornerImageViewWithUrl(usernameImage,128.dp,2.5.dp)
             Spacer(Modifier.height(15.dp))
-            Text(text = name)
+            Text(text = name, color = Color.White)
             //Spacer(Modifier.height(40.dp))
         }
 
         Column(
             modifier = Modifier
-                //.padding(15.dp)
+                .padding(15.dp)
+                .padding(top = 20.dp)
                 .fillMaxSize(),
             //verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+            TextWithSize(label = "Adresse", size = 20.sp)
+            TextWithSize(label = userInformations[0], size = 15.sp)
 
-            Text(text = name)
+            Spacer(modifier = Modifier.height(10.dp))
 
-            TextWithSize(label = "Adresse", size = 15.sp)
-            TextWithSize(label = "12 rue fsjfskfjs 95100 Argenteuil", size = 10.sp)
-            for (info in userInformations){
-                Text(text = info)
-            }
+            TextWithSize(label = "Mobile", size = 20.sp)
+            TextWithSize(label = userInformations[2], size = 15.sp)
 
-            //CardWithImage(label = name, imageUrl = usernameImage)
+            Spacer(modifier = Modifier.height(10.dp))
 
-            Spacer(modifier = Modifier.height(20.dp))
+            TextWithSize(label = "E-mail personnelle", size = 20.sp)
+            TextWithSize(label = userInformations[1], size = 15.sp)
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            TextWithSize(label = "E-mail scolaire", size = 20.sp)
+            TextWithSize(label = userInformations[3], size = 15.sp)
+
+            Spacer(modifier = Modifier.height(30.dp))
 
             logoutButton(baseText = "Déconnexion", navController = navController)
 

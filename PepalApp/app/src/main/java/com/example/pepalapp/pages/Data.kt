@@ -426,10 +426,20 @@ fun getInformations(){
         println(infos)
         println(infos::class.simpleName)
 
-        userInformations += "${infos.child(1).toString()} ${infos.child(3).toString()}"
-        userInformations += infos.child(8).toString()
-        userInformations += infos.child(12).toString()
-        userInformations += infos.child(15).toString()
+        println(infos.html())
+        val infoList = infos.html().split(">","<").toMutableList()
+        /*for ((s,index) in infoList.withIndex()){
+            println("${s} --- ${index}")
+        }*/
+
+        //infos.child(8).toString()
+
+        infoList[4] = infoList[4].removeRange(0,1)
+
+        userInformations += "${infoList[4]} ${infoList[6]}"
+        userInformations += infoList[22]
+        userInformations += infoList[32]
+        userInformations += infoList[38]
 
     }.start()
 }
@@ -452,6 +462,10 @@ fun getData() {
 }
 
 fun connection(navController: NavHostController){
+    dataAllNotes = null
+    dataCalendar = mutableListOf()
+    dataWorks = mutableListOf()
+    userInformations = mutableListOf()
     loginVerification() // Se connecte
     MakeToast(label = "Connexion")
     Thread.sleep(1000)

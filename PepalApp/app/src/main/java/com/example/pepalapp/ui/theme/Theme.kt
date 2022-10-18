@@ -9,6 +9,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+var customColor = false
+
 private val DarkColorPalette = darkColors(
     primary = Orange, // Couleurs UI
     primaryVariant = Purple700,
@@ -56,7 +58,7 @@ fun PepalAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
         // Update all of the system bar colors to be transparent, and use
         // dark icons if we're in light theme
         systemUiController.setSystemBarsColor(
-            color = colors.background,
+            color = if (!customColor) colors.background else Blue300,
             //darkIcons = !darkTheme
         )
     }

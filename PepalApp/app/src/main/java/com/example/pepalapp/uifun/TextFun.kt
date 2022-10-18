@@ -5,6 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,5 +24,5 @@ fun TitleText(text: String){
 
 @Composable
 fun TextWithSize(label: String, size: TextUnit) {
-    Text(label, fontSize = size)
+    Text(label, fontSize = size, modifier = Modifier.fillMaxWidth())
 }

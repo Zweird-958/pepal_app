@@ -1,6 +1,8 @@
 package com.example.pepalapp.uifun
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -16,6 +18,10 @@ import com.example.pepalapp.ui.theme.Purple200
 import com.example.pepalapp.ui.theme.Teal200
 
 import com.example.pepalapp.R
+import com.example.pepalapp.ui.theme.customColor
+import org.jsoup.internal.StringUtil.padding
+import java.lang.reflect.Modifier
+
 // TODO regler le selectindex
 
 @Composable
@@ -38,24 +44,25 @@ fun TopBar(navController: NavHostController) {
 @Composable
 fun BottomBar(navController: NavHostController) {
     val currentRoute = navController.currentDestination?.route
-    BottomNavigation(elevation = 10.dp) {
+    BottomNavigation() {
 
         BottomNavigationItem(icon = {
             Icon(imageVector = Icons.Default.AccountBox,"")
         },
-
-            label = { Text(text = "Account") },
+            label = { /*Text(text = "Account") */},
             selected = (currentRoute == Routes.Account.route),
             onClick = {
+                customColor = true
                 navController.navigate(Routes.Account.route)
             })
 
         BottomNavigationItem(icon = {
             Icon(painter = painterResource(id = R.drawable.school_24),"")
         },
-            label = { Text(text = "Marks") },
+            label = {/* Text(text = "Marks") */},
             selected = (currentRoute == Routes.Marks.route),
             onClick = {
+                customColor = false
                 navController.navigate(Routes.Marks.route)
 
             })
@@ -63,27 +70,30 @@ fun BottomBar(navController: NavHostController) {
         BottomNavigationItem(icon = {
             Icon(painter = painterResource(id = R.drawable.calendar),"")
         },
-            label = { Text(text = "EDT") },
+            label = {/* Text(text = "EDT") */},
             selected = (currentRoute == Routes.Calendar.route || currentRoute == Routes.FullCalendar.route),
             onClick = {
+                customColor = false
                 navController.navigate(Routes.Calendar.route)
             })
 
         BottomNavigationItem(icon = {
             Icon(painter = painterResource(id = R.drawable.work_24),"")
         },
-            label = { Text(text = "Works") },
+            label = { /*Text(text = "Works") */},
             selected = (currentRoute == Routes.Works.route),
             onClick = {
+                customColor = false
                 navController.navigate(Routes.Works.route)
             })
 
         BottomNavigationItem(icon = {
             Icon(imageVector = Icons.Default.Check,"")
         },
-            label = { Text(text = "Check") },
+            label = { /*Text(text = "Check")*/ },
             selected = (currentRoute == Routes.Validate.route),
             onClick = {
+                customColor = false
                 navController.navigate(Routes.Validate.route)
             })
 

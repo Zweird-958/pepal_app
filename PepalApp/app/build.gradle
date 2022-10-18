@@ -5,6 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.pepalapp'
+
     compileSdk 32
 
     defaultConfig {

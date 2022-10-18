@@ -155,6 +155,6 @@ fun logoutButton(baseText: String, navController: NavHostController) {
             bottom = 12.dp
         )
     ) {
-        Text(baseText)
+        Text(baseText, color = Color.White)
     }
 }
