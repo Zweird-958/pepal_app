@@ -105,6 +105,7 @@ fun validateButton(baseText: String, navController: NavHostController) {
             Thread.sleep(1000)
             if (actualID["id"] != null){
                 navController.navigate(Routes.Validate.route)
+                MakeToast(resultValidation)
             }
         },
         // Uses ButtonDefaults.ContentPadding by default
