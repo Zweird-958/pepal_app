@@ -389,10 +389,10 @@ fun activatePresence(){
                 .post()
 
             if (documentPost.text().contains("Validation impossible")){
-                MakeToast("Impossible de vous mettre présent !")
+                resultValidation = "Impossible de vous mettre présent !"
             }
             else{
-                MakeToast("Vous avez été noté présent !")
+                resultValidation = "Vous avez été noté présent !"
             }
 
         }
@@ -469,7 +469,15 @@ fun connection(navController: NavHostController){
     userInformations = mutableListOf()
     loginVerification() // Se connecte
     MakeToast(label = "Connexion")
-    Thread.sleep(1000)
+    //Thread.sleep
+    var limit = 0
+    while (cookie.isBlank()) {
+        Thread.sleep(100)
+        if (limit >= 20){
+            break
+        }
+        limit++
+    }
     if (cookie.isNotBlank()){
         getUserImage() // Récupère l'image
         getMarks() // Enregistre les notes dans une liste
@@ -481,6 +489,15 @@ fun connection(navController: NavHostController){
     else{
         MakeToast(label = "Erreur")
     }
-    Thread.sleep(200)
+    limit = 0
+    while (dataAllNotes == null || dataCalendar.isEmpty() || dataWorks.isEmpty() || userInformations.isEmpty())
+    {
+        Thread.sleep(100)
+        if (limit >= 20){
+            break
+        }
+        limit++
+    }
+
 
 }
