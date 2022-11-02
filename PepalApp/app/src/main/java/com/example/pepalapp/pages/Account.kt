@@ -15,7 +15,12 @@ import androidx.navigation.NavHostController
 import com.example.pepalapp.ui.theme.Blue300
 import com.example.pepalapp.uifun.*
 
-
+val ITEMS_ACCOUNT= mapOf<String,Int>(
+    "Adresse" to 0,
+    "Mobile" to 2,
+    "E-mail personnelle" to 1,
+    "E-mail scolaire" to 3,
+)
 
 @Composable
 fun AccountScaffold(navController: NavHostController){
@@ -55,25 +60,14 @@ fun Account(navController: NavHostController){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            val ITEMS_ACCOUNT = listOf<Map<String, Int>>(
-                mapOf(
-                    "Adresse" to 0,
-                    "Mobile" to 2,
-                    "E-mail personnelle" to 1,
-                    "E-mail scolaire" to 3,
-
-                )
-            )
 
             for (item in ITEMS_ACCOUNT){
-                println("==============")
-                println(item)
-                println(item.keys)
-                println(item.values)
-            //TextWithSize(label = item.keys, size = 20.sp)
+                TextWithSize(label = item.key, size = 20.sp)
+                TextWithSize(label = userInformations[item.value], size = 15.sp)
+                Spacer(modifier = Modifier.height(10.dp))
             }
 
-            TextWithSize(label = "Adresse", size = 20.sp)
+            /*TextWithSize(label = "Adresse", size = 20.sp)
             //Divider(modifier = Modifier.padding(end = 290.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[0], size = 15.sp)
 
@@ -93,9 +87,9 @@ fun Account(navController: NavHostController){
 
             TextWithSize(label = "E-mail scolaire", size = 20.sp)
             //Divider(modifier = Modifier.padding(end = 230.dp), color = Blue300, thickness = 2.dp)
-            TextWithSize(label = userInformations[3], size = 15.sp)
+            TextWithSize(label = userInformations[3], size = 15.sp)*/
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             logoutButton(baseText = "Déconnexion", navController = navController)
 

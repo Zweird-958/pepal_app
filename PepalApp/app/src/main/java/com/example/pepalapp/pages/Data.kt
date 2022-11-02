@@ -121,6 +121,23 @@ fun getMarks(){
             .cookie("sdv",cookie)
             .get()
 
+        println("========MARKS=========")
+        val marks = document.select("tbody").select("tr")
+        marks.forEachIndexed { index, mark ->
+            println("${index} : ${mark.child(0).text()}")
+            println(mark.className())
+            //println(marks.size)
+            if (index < 20){
+                if (marks.get(index+1).className() == "note_devoir"){
+                    for (i in index+1 until marks.size) {
+                        println(marks.get(i))
+                    }
+                }
+            }
+        }
+
+        println(marks)
+
         val allNotes: Elements = document.select("tr").select(".note_devoir")
         dataAllNotes = allNotes
 
@@ -423,11 +440,11 @@ fun getInformations(){
             .get()
 
         val infos = document.select("address")[0]
-        println("====================")
+        /*println("====================")
         println(infos)
         println(infos::class.simpleName)
 
-        println(infos.html())
+        println(infos.html())*/
         val infoList = infos.html().split(">","<").toMutableList()
         /*for ((s,index) in infoList.withIndex()){
             println("${s} --- ${index}")
@@ -438,9 +455,9 @@ fun getInformations(){
         infoList[4] = infoList[4].removeRange(0,1)
 
         userInformations += "${infoList[4]} ${infoList[6]}"
-        userInformations += infoList[22]
-        userInformations += infoList[32]
-        userInformations += infoList[38]
+        userInformations += infoList[22].replace(" ","")
+        userInformations += infoList[32].substring(1,infoList[32].length)
+        userInformations += infoList[38].replace(" ","")
 
     }.start()
 }
