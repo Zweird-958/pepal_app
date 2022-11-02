@@ -1,6 +1,5 @@
 package com.example.pepalapp.pages
 
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -62,25 +61,25 @@ fun Account(navController: NavHostController){
 
 
             TextWithSize(label = "Adresse", size = 20.sp)
-            Divider(modifier = Modifier.padding(end = 290.dp), color = Blue300, thickness = 2.dp)
+            //Divider(modifier = Modifier.padding(end = 290.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[0], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "Mobile", size = 20.sp)
-            Divider(modifier = Modifier.padding(end = 300.dp), color = Blue300, thickness = 2.dp)
+            //Divider(modifier = Modifier.padding(end = 300.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[2], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "E-mail personnelle", size = 20.sp)
-            Divider(modifier = Modifier.padding(end = 200.dp), color = Blue300, thickness = 2.dp)
+            //Divider(modifier = Modifier.padding(end = 200.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[1], size = 15.sp)
 
             Spacer(modifier = Modifier.height(10.dp))
 
             TextWithSize(label = "E-mail scolaire", size = 20.sp)
-            Divider(modifier = Modifier.padding(end = 230.dp), color = Blue300, thickness = 2.dp)
+            //Divider(modifier = Modifier.padding(end = 230.dp), color = Blue300, thickness = 2.dp)
             TextWithSize(label = userInformations[3], size = 15.sp)
 
             Spacer(modifier = Modifier.height(40.dp))
