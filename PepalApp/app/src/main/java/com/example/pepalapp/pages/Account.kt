@@ -1,25 +1,21 @@
 package com.example.pepalapp.pages
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalOf
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.pepalapp.ui.theme.Blue300
-import com.example.pepalapp.ui.theme.customColor
 import com.example.pepalapp.uifun.*
+
+
 
 @Composable
 fun AccountScaffold(navController: NavHostController){
@@ -59,6 +55,23 @@ fun Account(navController: NavHostController){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+            val ITEMS_ACCOUNT = listOf<Map<String, Int>>(
+                mapOf(
+                    "Adresse" to 0,
+                    "Mobile" to 2,
+                    "E-mail personnelle" to 1,
+                    "E-mail scolaire" to 3,
+
+                )
+            )
+
+            for (item in ITEMS_ACCOUNT){
+                println("==============")
+                println(item)
+                println(item.keys)
+                println(item.values)
+            //TextWithSize(label = item.keys, size = 20.sp)
+            }
 
             TextWithSize(label = "Adresse", size = 20.sp)
             //Divider(modifier = Modifier.padding(end = 290.dp), color = Blue300, thickness = 2.dp)
