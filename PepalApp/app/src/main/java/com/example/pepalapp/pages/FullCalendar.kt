@@ -49,7 +49,7 @@ fun FullCalendarScaffold(navController: NavHostController){
 @Composable
 fun FullCalendar(){
 
-    val test = remember { mutableStateOf(true) }
+    val showEntreprise = remember { mutableStateOf(true) }
     Column(modifier = Modifier
         .fillMaxSize()) {
 
@@ -60,7 +60,7 @@ fun FullCalendar(){
             verticalAlignment = Alignment.CenterVertically,) {
 
             Text(text = "Entreprise :")
-            CheckBoxOnOff(stockVal = test)
+            CheckBoxOnOff(stockVal = showEntreprise)
 
         }
 
@@ -106,7 +106,7 @@ fun FullCalendar(){
                                 }
                             }
                             if (cours["Matière"] == "Entreprise"){
-                                if (test.value){
+                                if (showEntreprise.value){
                                     CardWithMultipleViews(cardText)
                                 }
                             }

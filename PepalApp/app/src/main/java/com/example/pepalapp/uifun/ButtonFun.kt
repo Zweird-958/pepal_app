@@ -191,3 +191,26 @@ fun CheckBoxOnOff(stockVal: MutableState<Boolean>) {
         colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
     )
 }
+
+@Composable
+fun ButtonSort(stockVal: MutableState<Int>, limit: Int) {
+    val issues: List<String> = listOf("Matière", "Date ⬇", "Date ⬆", "Note ⬇", "Note ⬆")
+
+    Button(onClick = {
+        if (stockVal.value < limit){
+            stockVal.value++
+        }
+        else{
+            stockVal.value = 0
+        }
+    },
+        contentPadding = PaddingValues(
+            start = 20.dp,
+            top = 12.dp,
+            end = 20.dp,
+            bottom = 12.dp
+        )
+    ){
+        Text(text = "⬇⬆ : ${issues[stockVal.value]}")
+    }
+}

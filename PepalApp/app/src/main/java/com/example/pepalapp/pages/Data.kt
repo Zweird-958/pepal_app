@@ -2,18 +2,14 @@ package com.example.pepalapp.pages
 
 import android.app.Activity
 import android.content.Context
-import android.provider.DocumentsContract.Document
-import android.provider.Settings.Global.getString
-import android.text.TextUtils.replace
-import android.text.TextUtils.split
-import android.view.View
-import android.widget.Toast
+import android.os.Build
 import androidx.activity.ComponentActivity
-import androidx.compose.runtime.Composable
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavHostController
-import com.example.pepalapp.R
+import com.example.pepalapp.MarkClass
+import com.example.pepalapp.allMarksClass
+import com.example.pepalapp.sortByDate
 import com.example.pepalapp.uifun.MakeToast
-import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
@@ -113,6 +109,7 @@ fun loginVerification() {
     }.start()
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun getMarks(){
     Thread {
         val document = Jsoup
@@ -121,66 +118,82 @@ fun getMarks(){
             .cookie("sdv",cookie)
             .get()
 
-        println("========MARKS=========")
+
         val marks = document.select("tbody").select("tr")
         marks.forEachIndexed { index, mark ->
-            println("${index} : ${mark.child(0).text()}")
-            println(mark.className())
-            //println(marks.size)
-            if (index < 20){
-                if (marks.get(index+1).className() == "note_devoir"){
-                    for (i in index+1 until marks.size) {
-                        println(marks.get(i))
+
+            // Si c'est une matière et qu'on peut encore continuer on regarde si il y a des notes
+            if (index < marks.size -1 && mark.className() == "info"){
+                if (marks.get(index+1).className() == "note_devoir"){ // Si il y a une note ou non
+
+                    // Valeur pour savoir si on a besoin de créer une nouvelle Note ou pas
+                    var markCounter = 0
+                    var dataCounter: Int? = null
+                    var canAdd = false
+                    var Mark: MarkClass? = null
+
+                    // On parcourt donc toutes les notes qui suivent la matière
+                    for (i in index+1 until marks.size - 1) {
+                        val getMark = marks.get(i)
+
+                        // Si il s'agit d'une nouvelle note (dès la première ça l'éxecutera)
+                        if (markCounter != dataCounter){
+                            // Si il y a plusieurs notes on l'ajoute ici dans la liste
+                            if (Mark != null && canAdd){
+                                canAdd = false
+                                Mark.addToList()
+                            }
+                            // Savoir qu'on modifie la même note
+                            dataCounter = markCounter
+                            // On crée la note class et on lui met son coef
+                            Mark = MarkClass(mark.child(0).text())
+                            Mark.addCoef(mark.child(1).text().toFloat())
+                        }
+
+
+                        // On ajoute la date, la note et le nom du contrôle
+                        // On fait canAdd = true pour savoir que la note à été adapté et qu'on peut ainsi l'enregistrer
+                        if (getMark.className() == "note_devoir"){
+                            if (Mark != null) {
+                                Mark.addDate(getMark.child(2).text())
+                                Mark.addNote(getMark.child(3).text())
+                                Mark.addName(getMark.child(0).text())
+                                canAdd = true
+                            }
+                        }
+                        // Ligne de l'appréciation qu'on ajoute
+                        // markCounter++ pour dire qu'on a terminé la note actuelle (pas forcément la matière)
+                        else if (getMark.className() == ""){
+                            markCounter++
+                            if (Mark != null) {
+                                Mark.addAppreciation(marks.get(i).text())
+                            }
+                        }
+                        // On change de matière, si on n'a pas encore enregistré notre classe on le fait
+                        else {
+                            if (Mark != null && canAdd) {
+                                Mark.addToList()
+                            }
+                            break
+                        }
                     }
                 }
             }
+
         }
 
-        println(marks)
-
-        val allNotes: Elements = document.select("tr").select(".note_devoir")
-        dataAllNotes = allNotes
-
-        for (note in dataAllNotes!!){
-            val info = note.select("td")
-            val infoNote = info[3].text()
-            avg += infoNote.toFloat()
+        for (mark in allMarksClass){
+            avg += mark.note.toFloat()
         }
-        avg/= dataAllNotes!!.size
+        avg/= allMarksClass.size
 
-    }.start()
-}
-/*
-fun getMarksWithCoef(){
-    Thread {
-        val document = Jsoup
-            .connect(url+"?my=notes")
-            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
-            .cookie("sdv",cookie)
-            .get()
-
-        val allNotes: Elements = document.select("tbody").toMutableList() as Elements
-
-        println("=================")
-        for (s in allNotes){
-            println("=========================")
-            println(s)
-        }
-        //println(allNotes)
-        //println(allNotes)
-        /*for (index in allNotes.html().indices){
-            println(index)
-            val note = allNotes[index]
-            println(note.text())/*
-            if (note.html().contains("info")){
-                println("info")
-                println(note)
-                println("note")
-                println(allNotes[index+1])
-            }*/
+        /*println("+++++++++++++++++++")
+        for (t in test){
+            t.showMark()
         }*/
 
-        /*dataAllNotes = allNotes
+        /*val allNotes: Elements = document.select("tr").select(".note_devoir")
+        dataAllNotes = allNotes
 
         for (note in dataAllNotes!!){
             val info = note.select("td")
@@ -191,7 +204,7 @@ fun getMarksWithCoef(){
 
     }.start()
 }
-*/
+
 fun allCalendar(){
     Thread {
         val document = Jsoup
@@ -283,6 +296,8 @@ fun allCalendar(){
 
         }
         dataCalendar.sortBy { it["Début"] }
+
+
     }.start()
 }
 
@@ -479,6 +494,7 @@ fun getData() {
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun connection(navController: NavHostController){
     dataAllNotes = null
     dataCalendar = mutableListOf()
