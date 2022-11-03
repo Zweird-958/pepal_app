@@ -3,6 +3,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.pepalapp.pages.*
@@ -193,7 +195,7 @@ fun CheckBoxOnOff(stockVal: MutableState<Boolean>) {
 }
 
 @Composable
-fun ButtonSort(stockVal: MutableState<Int>, limit: Int) {
+fun ButtonSort(stockVal: MutableState<Int>, limit: Int, fontSize: TextUnit) {
     val issues: List<String> = listOf("Matière", "Date ⬇", "Date ⬆", "Note ⬇", "Note ⬆")
 
     Button(onClick = {
@@ -211,6 +213,6 @@ fun ButtonSort(stockVal: MutableState<Int>, limit: Int) {
             bottom = 12.dp
         )
     ){
-        Text(text = "⬇⬆ : ${issues[stockVal.value]}")
+        Text(text = "⬇⬆ : ${issues[stockVal.value]}", fontSize = fontSize)
     }
 }

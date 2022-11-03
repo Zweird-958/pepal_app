@@ -46,7 +46,7 @@ fun Marks(){
 
     val marksLists: List<List<MarkClass>> = listOf(allMarksClass, sortByDate(), sortByDate().reversed(), sortByNote(), sortByNote().reversed())
     val sortMarks = remember { mutableStateOf(0) }
-    ButtonSort(stockVal = sortMarks, limit = marksLists.size-1)
+
 
 
     Column(
@@ -56,6 +56,16 @@ fun Marks(){
     horizontalAlignment = Alignment.End ) {
 
         Text("Moyenne : ${roundWithTwo(avg)}", fontSize = 17.sp)
+
+    }
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 88.dp, start = 20.dp),
+        horizontalAlignment = Alignment.Start ) {
+
+        ButtonSort(stockVal = sortMarks, limit = marksLists.size-1, 17.sp)
 
     }
 

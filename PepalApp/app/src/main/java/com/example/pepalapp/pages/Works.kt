@@ -43,7 +43,7 @@ fun WorksScaffold(navController: NavHostController){
 @Composable
 fun Works(){
 
-    TitleText("Works")
+    TitleText("Rendus")
     
     Column(
         modifier = Modifier
