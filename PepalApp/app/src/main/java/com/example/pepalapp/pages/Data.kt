@@ -125,55 +125,32 @@ fun getMarks(){
             // Si c'est une matière et qu'on peut encore continuer on regarde si il y a des notes
             if (index < marks.size -1 && mark.className() == "info"){
                 if (marks.get(index+1).className() == "note_devoir"){ // Si il y a une note ou non
-
                     // Valeur pour savoir si on a besoin de créer une nouvelle Note ou pas
-                    var markCounter = 0
-                    var dataCounter: Int? = null
-                    var canAdd = false
                     var Mark: MarkClass? = null
 
                     // On parcourt donc toutes les notes qui suivent la matière
                     for (i in index+1 until marks.size - 1) {
-                        val getMark = marks.get(i)
+                        val getMark = marks.get(i) // Note actuelle
 
-                        // Si il s'agit d'une nouvelle note (dès la première ça l'éxecutera)
-                        if (markCounter != dataCounter){
-                            // Si il y a plusieurs notes on l'ajoute ici dans la liste
-                            if (Mark != null && canAdd){
-                                canAdd = false
-                                Mark.addToList()
-                            }
-                            // Savoir qu'on modifie la même note
-                            dataCounter = markCounter
-                            // On crée la note class et on lui met son coef
+                        // Si il s'agit d'une nouvelle note on ajoute ses infos
+                        if (getMark.className() == "note_devoir" ){
                             Mark = MarkClass(mark.child(0).text())
                             Mark.addCoef(mark.child(1).text().toFloat())
+                            Mark.addDate(getMark.child(2).text())
+                            Mark.addNote(getMark.child(3).text())
+                            Mark.addName(getMark.child(0).text())
+                            Mark.addToList()
                         }
 
-
-                        // On ajoute la date, la note et le nom du contrôle
-                        // On fait canAdd = true pour savoir que la note à été adapté et qu'on peut ainsi l'enregistrer
-                        if (getMark.className() == "note_devoir"){
-                            if (Mark != null) {
-                                Mark.addDate(getMark.child(2).text())
-                                Mark.addNote(getMark.child(3).text())
-                                Mark.addName(getMark.child(0).text())
-                                canAdd = true
-                            }
-                        }
                         // Ligne de l'appréciation qu'on ajoute
-                        // markCounter++ pour dire qu'on a terminé la note actuelle (pas forcément la matière)
                         else if (getMark.className() == ""){
-                            markCounter++
                             if (Mark != null) {
                                 Mark.addAppreciation(marks.get(i).text())
                             }
                         }
-                        // On change de matière, si on n'a pas encore enregistré notre classe on le fait
+
+                        // On change de matière, alors on s'arrête là.
                         else {
-                            if (Mark != null && canAdd) {
-                                Mark.addToList()
-                            }
                             break
                         }
                     }
