@@ -101,6 +101,11 @@ fun sortByDate(): List<MarkClass> {
     return newList
 }
 
+fun sortByMatiere(): List<MarkClass>{
+    return allMarksClass.sortedBy { it.matiere }
+}
+
+
 fun sortByNote(): List<MarkClass>{
     return allMarksClass.sortedBy { it.note }
 }

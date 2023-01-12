@@ -17,10 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.pepalapp.MarkClass
-import com.example.pepalapp.allMarksClass
-import com.example.pepalapp.sortByDate
-import com.example.pepalapp.sortByNote
+import com.example.pepalapp.*
 import com.example.pepalapp.uifun.*
 import kotlin.math.round
 import kotlin.math.roundToInt
@@ -44,7 +41,7 @@ fun Marks(){
     
     TitleText("Notes")
 
-    val marksLists: List<List<MarkClass>> = listOf(allMarksClass, sortByDate(), sortByDate().reversed(), sortByNote(), sortByNote().reversed())
+    val marksLists: List<List<MarkClass>> = listOf(sortByMatiere(), sortByDate(), sortByDate().reversed(), sortByNote(), sortByNote().reversed())
     val sortMarks = remember { mutableStateOf(0) }
 
 
