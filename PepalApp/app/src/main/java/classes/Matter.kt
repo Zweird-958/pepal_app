@@ -2,12 +2,12 @@ package classes
 
 var mattersList = mutableListOf<Matter>()
 
-class Matter (val name: String, var totalMarks: Float){
+class Matter (val name: String, var totalMarks: Float, val coef: Float){
 
-    public var numberOfMarks: Int = 0
+    var numberOfMarks: Int = 0
 
-    constructor(name: String, totalMarks: Float, mattersList: MutableList<Matter>) :
-            this(name, totalMarks) {
+    constructor(name: String, totalMarks: Float, coef: Float, mattersList: MutableList<Matter>) :
+            this(name, totalMarks, coef) {
         val matter = mattersList.firstOrNull { it.name == name }
         if (matter != null) {
             matter.addNewMark(totalMarks)
