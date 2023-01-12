@@ -167,7 +167,7 @@ fun getMarks(){
 
         //var markOfEachMatter = listOf<String>()
         for (mark in allMarksClass){
-           Matter(mark.matiere,1,20.0f, mattersList)
+           Matter(mark.matiere,mark.note.toFloat(), mattersList)
         }
 
         println("MATTERLIST==========")
