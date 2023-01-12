@@ -163,27 +163,16 @@ fun getMarks(){
         }
 
 
-        // Anglais : { totalMark : 2064, numberOfMarks : 2, avg : 20 }
-
-        //var markOfEachMatter = listOf<String>()
         for (mark in allMarksClass){
-           Matter(mark.matiere,mark.note.toFloat(), mattersList)
+           Matter(mark.matiere,mark.note.toFloat(), mark.coef,mattersList)
         }
 
-        println("MATTERLIST==========")
-        println(mattersList)
+
 
         for (matter in mattersList){
-            println(matter.name)
-            println(matter.totalMarks)
-            println(matter.numberOfMarks)
+            avg += (matter.totalMarks / matter.numberOfMarks) * matter.coef
         }
-
-        for (mark in allMarksClass){
-            avg += mark.note.toFloat()
-        }
-
-        avg/= allMarksClass.size
+        avg /= mattersList.size
 
 
 
