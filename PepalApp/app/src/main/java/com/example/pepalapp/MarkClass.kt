@@ -47,7 +47,6 @@ class MarkClass (matiere: String) {
     fun addToList() {
         this.indexToList = allMarksClass.size
         allMarksClass += this
-        println(this.matiere + "added to list !")
     }
 
     fun addCoef(coef: Float) {
