@@ -1,4 +1,6 @@
 package com.example.pepalapp.uifun
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,6 +16,7 @@ import org.jsoup.select.Elements
 import java.lang.reflect.Modifier
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun loginButton(baseText: String, listStock: List<MutableState<String>>, navController: NavHostController) {
     Button(
