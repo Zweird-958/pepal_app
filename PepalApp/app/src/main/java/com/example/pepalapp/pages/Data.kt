@@ -168,16 +168,17 @@ fun getMarks(){
         }
 
 
-
         for (matter in mattersList){
-            avg += (matter.totalMarks / matter.numberOfMarks) * matter.coef
+            avg += (matter.totalMarks / matter.numberOfMarks)
         }
-        avg /= mattersList.size
+
+        avg /= mattersList.map { it.coef }.sum()
 
 
 
     }.start()
 }
+
 
 fun allCalendar(){
     Thread {
@@ -199,11 +200,12 @@ fun allCalendar(){
             .split("},{").toMutableList()
 
         dictEdt[0] = dictEdt[0].replace("{","")
+        println("CALENDAR================")
+
         // Pour chaque cours
         dictEdt.forEach { child ->
             // On transforme string to List en séparant chaque l'élément (par ": et ,)
             val toList = child.split("\":",",").toMutableList()
-
             // On supprimer les caractères inutiles
             for (s in toList.indices) {
                 toList[s] = toList[s].replace("\"\"","?").replace("\"","")
@@ -232,10 +234,9 @@ fun allCalendar(){
             }
 
 
-
-
             // on l'ajoute à notre liste
             if (toList[3]?.contains("Rendu") == true){
+
                 // on crée le dictionnaire
                 for (info in toList){
                     //println("=================TEST===========")
@@ -265,11 +266,13 @@ fun allCalendar(){
                     "Début" to toList[9],
                     "Fin" to toList[11],
                 )
+
                 dataCalendar += listOf(coursDict) as MutableList<MutableMap<String, String>>
             }
 
         }
         dataCalendar.sortBy { it["Début"] }
+        println(dataCalendar)
 
 
     }.start()
