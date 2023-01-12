@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.navigation.NavHostController
+import classes.Matter
+import classes.mattersList
 import com.example.pepalapp.MarkClass
 import com.example.pepalapp.allMarksClass
 import com.example.pepalapp.sortByDate
@@ -124,13 +126,14 @@ fun getMarks(){
 
             // Si c'est une matière et qu'on peut encore continuer on regarde si il y a des notes
             if (index < marks.size -1 && mark.className() == "info"){
-                if (marks.get(index+1).className() == "note_devoir"){ // Si il y a une note ou non
+                // Si il y a une note ou non
+                if (marks.get(index+1).className() == "note_devoir"){
                     // Valeur pour savoir si on a besoin de créer une nouvelle Note ou pas
                     var Mark: MarkClass? = null
 
                     // On parcourt donc toutes les notes qui suivent la matière
                     for (i in index+1 until marks.size - 1) {
-                        val getMark = marks.get(i) // Note actuelle
+                        val getMark = marks.get(i) // Note actuell
 
                         // Si il s'agit d'une nouvelle note on ajoute ses infos
                         if (getMark.className() == "note_devoir" ){
@@ -159,25 +162,23 @@ fun getMarks(){
 
         }
 
+
+        // Anglais : { totalMark : 2064, numberOfMarks : 2, avg : 20 }
+
+        //var markOfEachMatter = listOf<String>()
+        for (mark in allMarksClass){
+           Matter(mark.matiere,1,20.0f, mattersList)
+        }
+
+        println("MATTERLIST==========")
+        println(mattersList)
+
         for (mark in allMarksClass){
             avg += mark.note.toFloat()
         }
         avg/= allMarksClass.size
 
-        /*println("+++++++++++++++++++")
-        for (t in test){
-            t.showMark()
-        }*/
 
-        /*val allNotes: Elements = document.select("tr").select(".note_devoir")
-        dataAllNotes = allNotes
-
-        for (note in dataAllNotes!!){
-            val info = note.select("td")
-            val infoNote = info[3].text()
-            avg += infoNote.toFloat()
-        }
-        avg/= dataAllNotes!!.size*/
 
     }.start()
 }
