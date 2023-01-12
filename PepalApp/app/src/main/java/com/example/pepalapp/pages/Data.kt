@@ -6,7 +6,9 @@ import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.navigation.NavHostController
+import classes.Course
 import classes.Matter
+import classes.courseList
 import classes.mattersList
 import com.example.pepalapp.MarkClass
 import com.example.pepalapp.allMarksClass
@@ -266,11 +268,22 @@ fun allCalendar(){
                     "Début" to toList[9],
                     "Fin" to toList[11],
                 )
+                val debut = toList[9].split("T")
+                val fin = toList[11].split("T")
+                println("DATE+================")
+                println(fin)
+
+                println("${toList[1]}${toList[3]}${toList[5]}${toList[7]}${fin[0]}${debut.getOrNull(1)}${debut.getOrNull(0)}${fin.getOrNull(1)}${fin.getOrNull(0)}")
+                Course(toList[1].toInt(),toList[3],toList[5],toList[7],
+                    debut.getOrNull(1), debut.getOrNull(0), fin.getOrNull(1), fin.getOrNull(0),
+                    courseList
+                )
 
                 dataCalendar += listOf(coursDict) as MutableList<MutableMap<String, String>>
             }
 
         }
+        courseList.sortBy { it.dateDebut }
         dataCalendar.sortBy { it["Début"] }
         println(dataCalendar)
 

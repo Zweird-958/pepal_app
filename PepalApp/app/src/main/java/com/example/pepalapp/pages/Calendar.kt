@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import classes.courseList
 import com.example.pepalapp.uifun.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -57,6 +58,7 @@ fun Calendar(navController: NavHostController){
         val currentDate = dateFormat.format(Date())
         var found: Boolean = false
         var lastCours = 0
+        /*
         for (cours in dataCalendar){
             var cardText:List<String> = listOf()
 
@@ -90,10 +92,63 @@ fun Calendar(navController: NavHostController){
                 }
 
             }
-
-
         }
 
+*/
+            for (cours in courseList){
+                var cardText:List<String> = listOf()
+
+                if (!cours.heureDebut.isNullOrEmpty()){
+
+                    if (cours.dateDebut != null){
+                        println("CALENDAR==============")
+                        println("-"+cours.dateDebut)
+                        println(currentDate)
+                        println(cours.dateDebut == currentDate)
+                        if (cours.dateDebut == currentDate){
+
+                            /*println("PROPRIETE============")
+                            for (property in cours::class.members) {
+                                println("${property.name}: ${property.call(cours)}")
+                            }*/
+                            cardText += "Matière : ${cours.matiere}"
+                            cardText += "Intervenant : ${cours.intervenant}"
+                            cardText += "Salle : ${cours.salle}"
+                            val formatDate = cours.dateDebut.split("-").reversed()
+                            cardText += "Date : ${formatDate[0]}/${formatDate[1]}/${formatDate[2]}"
+                            cardText += "Heure : ${cours.heureDebut}"
+                            found = true
+                            CardWithMultipleViews(cardText)
+
+                        }
+                        else if (currentDate < cours.dateDebut){
+                            lastCours++
+                        }
+                    }
+
+                }
+            }
+
+        if (!found){
+            val cours = courseList[lastCours]
+
+            var cardText:List<String> = listOf()
+            cardText += "Matière : ${cours.matiere}"
+            cardText += "Intervenant : ${cours.intervenant}"
+            cardText += "Salle : ${cours.salle}"
+            if (!cours.dateDebut.isNullOrEmpty()){
+                val formatDate = cours.dateDebut.split("-").reversed()
+                cardText += "Date : ${formatDate[0]}/${formatDate[1]}/${formatDate[2]}"
+            }
+            else{
+                cardText += "Date : X"
+            }
+            cardText += "Heure : ${cours.heureDebut}"
+
+            CardWithMultipleViews(cardText)
+        }
+
+/*
         if (!found){
             val cours = dataCalendar[lastCours]
             val coursAndDate = cours["Début"]?.split("T")
@@ -116,7 +171,7 @@ fun Calendar(navController: NavHostController){
             }
             CardWithMultipleViews(cardText)
         }
-
+*/
         Spacer(modifier = Modifier.height(25.dp))
 
         calendarButton(baseText = "VOIR PLUS", navController = navController)
