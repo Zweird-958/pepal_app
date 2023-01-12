@@ -53,7 +53,7 @@ fun Calendar(navController: NavHostController){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        val dateFormat = SimpleDateFormat("yyyy-M-dd")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val currentDate = dateFormat.format(Date())
         var found: Boolean = false
         var lastCours = 0
@@ -61,9 +61,11 @@ fun Calendar(navController: NavHostController){
             var cardText:List<String> = listOf()
 
             if (cours["Début"]?.contains("T") == true){
+
                 val coursAndDate = cours["Début"]?.split("T")
                 val getCoursDate = coursAndDate?.get(0)
                 val getCoursHour = coursAndDate?.get(1)
+
                 if (getCoursDate != null){
                     if (getCoursDate == currentDate){
                         for (info in cours){
