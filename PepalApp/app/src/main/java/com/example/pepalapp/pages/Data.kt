@@ -173,9 +173,16 @@ fun getMarks(){
         println("MATTERLIST==========")
         println(mattersList)
 
+        for (matter in mattersList){
+            println(matter.name)
+            println(matter.totalMarks)
+            println(matter.numberOfMarks)
+        }
+
         for (mark in allMarksClass){
             avg += mark.note.toFloat()
         }
+
         avg/= allMarksClass.size
 
 
