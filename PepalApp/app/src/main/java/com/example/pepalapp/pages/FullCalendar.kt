@@ -74,7 +74,7 @@ fun FullCalendar(){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            val dateFormat = SimpleDateFormat("yyyy-M-dd")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val currentDate = dateFormat.format(Date())
 
 
