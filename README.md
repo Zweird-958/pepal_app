@@ -1,5 +1,5 @@
 # pepal_app
 
 # TO DO 
-❌ FIX GET MARKS
+❌ FIX ALL GET MARKS
 ❌ AVG PER MATTER
