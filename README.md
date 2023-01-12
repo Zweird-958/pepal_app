@@ -1,6 +1,7 @@
 # pepal_app
 
-# TO DO 
-❌ FIX ALL GET MARKS
+# TO DO
+
+✔ FIX ALL GET MARKS
 ❌ AVG PER MATTER
 ❌ FIX CALENDAR
