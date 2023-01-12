@@ -1,10 +1,11 @@
 package classes
 
-var mattersList = listOf<Matter>()
+var mattersList = mutableListOf<Matter>()
 
 class Matter (val name: String, var numberOfMarks: Int, var totalMarks: Float){
 
-    constructor(name: String, numberOfMarks: Int, totalMarks: Float, mattersList: MutableList<Matter>) : this(name, numberOfMarks, totalMarks) {
+    constructor(name: String, numberOfMarks: Int, totalMarks: Float,mattersList: MutableList<Matter>) :
+            this(name, numberOfMarks, totalMarks) {
         if (mattersList.any { it.name == name }) {
             println("Error : Name already taken")
         } else {
@@ -12,10 +13,8 @@ class Matter (val name: String, var numberOfMarks: Int, var totalMarks: Float){
         }
     }
 
-
     fun addNewMark(newMark: Float){
         this.numberOfMarks += 1
         this.totalMarks += newMark
     }
-
 }
