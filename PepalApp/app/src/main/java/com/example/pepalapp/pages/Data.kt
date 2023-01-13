@@ -22,7 +22,6 @@ import java.util.*
 
 // Data
 var mainActivity: Activity? = null
-var dataMap: MutableList<MutableMap<String, String>> = mutableListOf()
 
 // Users informations
 var dataUsername = ""
@@ -39,7 +38,6 @@ var resultValidation = ""
 var userInformations = listOf<String>()
 
 // List de Maps
-var dataCalendar: MutableList<MutableMap<String, String>> = mutableListOf()
 var dataWorks: MutableList<MutableMap<String, String>> = mutableListOf()
 var actualID: Map<String,String> = mapOf()
 
@@ -284,8 +282,6 @@ fun allCalendar(){
 
         }
         courseList.sortBy { it.dateDebut }
-        dataCalendar.sortBy { it["Début"] }
-        println(dataCalendar)
 
 
     }.start()
