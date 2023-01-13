@@ -142,8 +142,7 @@ fun logoutButton(baseText: String, navController: NavHostController) {
             dataId = mutableListOf()
             resultValidation = ""
 
-            dataCalendar = mutableListOf()
-            dataWorks = mutableListOf()
+            //dataWorks = mutableListOf()
             actualID = mapOf()
 
             saveData()

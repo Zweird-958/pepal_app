@@ -258,26 +258,15 @@ fun allCalendar(){
             }
             else{
                 // on crée le dictionnaire
-                val coursDict = mutableMapOf<String,String>(
-                    toList[0] to toList[1],
-                    "Matière" to toList[3],
-                    "Intervenant" to toList[5],
-                    "Salle" to toList[7],
-                    "Début" to toList[9],
-                    "Fin" to toList[11],
-                )
+
                 val debut = toList[9].split("T")
                 val fin = toList[11].split("T")
-                println("DATE+================")
-                println(fin)
 
-                println("${toList[1]}${toList[3]}${toList[5]}${toList[7]}${fin[0]}${debut.getOrNull(1)}${debut.getOrNull(0)}${fin.getOrNull(1)}${fin.getOrNull(0)}")
-                Course(toList[1].toInt(),toList[3],toList[5],toList[7],
+               Course(toList[1].toInt(),toList[3],toList[5],toList[7],
                     debut.getOrNull(1), debut.getOrNull(0), fin.getOrNull(1), fin.getOrNull(0),
                     courseList
                 )
 
-                dataCalendar += listOf(coursDict) as MutableList<MutableMap<String, String>>
             }
 
         }
@@ -441,17 +430,9 @@ fun getInformations(){
             .get()
 
         val infos = document.select("address")[0]
-        /*println("====================")
-        println(infos)
-        println(infos::class.simpleName)
 
-        println(infos.html())*/
         val infoList = infos.html().split(">","<").toMutableList()
-        /*for ((s,index) in infoList.withIndex()){
-            println("${s} --- ${index}")
-        }*/
 
-        //infos.child(8).toString()
 
         infoList[4] = infoList[4].removeRange(0,1)
 
@@ -483,7 +464,6 @@ fun getData() {
 @RequiresApi(Build.VERSION_CODES.O)
 fun connection(navController: NavHostController){
     dataAllNotes = null
-    dataCalendar = mutableListOf()
     dataWorks = mutableListOf()
     userInformations = mutableListOf()
     loginVerification() // Se connecte
@@ -509,7 +489,7 @@ fun connection(navController: NavHostController){
         MakeToast(label = "Erreur")
     }
     limit = 0
-    while (dataAllNotes == null || dataCalendar.isEmpty() || dataWorks.isEmpty() || userInformations.isEmpty())
+    while (dataAllNotes == null || courseList.isEmpty() || dataWorks.isEmpty() || userInformations.isEmpty())
     {
         Thread.sleep(100)
         if (limit >= 20){
