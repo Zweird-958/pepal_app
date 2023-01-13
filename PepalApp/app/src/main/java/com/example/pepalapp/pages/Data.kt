@@ -6,10 +6,7 @@ import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.navigation.NavHostController
-import classes.Course
-import classes.Matter
-import classes.courseList
-import classes.mattersList
+import classes.*
 import com.example.pepalapp.MarkClass
 import com.example.pepalapp.allMarksClass
 import com.example.pepalapp.sortByDate
@@ -17,6 +14,7 @@ import com.example.pepalapp.uifun.MakeToast
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import utils.prettyList
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +28,6 @@ var avg: Float = 0F
 var name = ""
 var cookie = ""
 var usernameImage = ""
-var dataAllNotes: Elements? = null
 var dataId: MutableList<String> = mutableListOf()
 var resultValidation = ""
 
@@ -205,7 +202,7 @@ fun allCalendar(){
         // Pour chaque cours
         dictEdt.forEach { child ->
             // On transforme string to List en séparant chaque l'élément (par ": et ,)
-            val toList = child.split("\":",",").toMutableList()
+            var toList = child.split("\":",",").toMutableList()
             // On supprimer les caractères inutiles
             for (s in toList.indices) {
                 toList[s] = toList[s].replace("\"\"","?").replace("\"","")
@@ -233,18 +230,12 @@ fun allCalendar(){
                 }
             }
 
+            val newList = prettyList(toList)
 
             // on l'ajoute à notre liste
             if (toList[3]?.contains("Rendu") == true){
+                println("RENDER====")
 
-                // on crée le dictionnaire
-                for (info in toList){
-                    //println("=================TEST===========")
-                    info.replace("r<br","")//.replace("\\","")
-                        .replace("\\u00e9","test")
-                    //(info.contains("\\u00e9"))
-                    //charReplace(info)
-                }
 
                 val coursDict = mutableMapOf<String,String>(
                     toList[0] to toList[1],
@@ -253,16 +244,20 @@ fun allCalendar(){
                     "Début" to toList[9],
                     "Fin" to toList[11],
                 )
+                println(newList)
+                /*val materr = newList[3].split("-")[-1]
+                val renderName = newList[3].split("-").dropLast(1).joinToString("-")
+                Render(newList[1],)*/
 
                 dataWorks += listOf(coursDict) as MutableList<MutableMap<String, String>>
             }
             else{
                 // on crée le dictionnaire
 
-                val debut = toList[9].split("T")
-                val fin = toList[11].split("T")
+                val debut = newList[9].split("T")
+                val fin = newList[11].split("T")
 
-               Course(toList[1].toInt(),toList[3],toList[5],toList[7],
+               Course(newList[1].toInt(),newList[3],newList[5],newList[7],
                     debut.getOrNull(1), debut.getOrNull(0), fin.getOrNull(1), fin.getOrNull(0),
                     courseList
                 )
@@ -463,7 +458,6 @@ fun getData() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun connection(navController: NavHostController){
-    dataAllNotes = null
     dataWorks = mutableListOf()
     userInformations = mutableListOf()
     loginVerification() // Se connecte
@@ -489,7 +483,7 @@ fun connection(navController: NavHostController){
         MakeToast(label = "Erreur")
     }
     limit = 0
-    while (dataAllNotes == null || courseList.isEmpty() || dataWorks.isEmpty() || userInformations.isEmpty())
+    while (allMarksClass.isEmpty() || courseList.isEmpty() || dataWorks.isEmpty() || userInformations.isEmpty())
     {
         Thread.sleep(100)
         if (limit >= 20){
