@@ -128,7 +128,6 @@ fun validateButton(baseText: String, navController: NavHostController) {
 @Composable
 fun logoutButton(baseText: String, navController: NavHostController) {
     Button(
-        //modifier = Modifier.width(15.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
         onClick = {
             navController.navigate(Routes.Login.route)
@@ -138,7 +137,6 @@ fun logoutButton(baseText: String, navController: NavHostController) {
             name = ""
             cookie = ""
             usernameImage = ""
-            dataAllNotes = null
             dataId = mutableListOf()
             resultValidation = ""
 
