@@ -58,53 +58,12 @@ fun Calendar(navController: NavHostController){
         val currentDate = dateFormat.format(Date())
         var found: Boolean = false
         var lastCours = 0
-        /*
-        for (cours in dataCalendar){
-            var cardText:List<String> = listOf()
 
-            if (cours["Début"]?.contains("T") == true){
-
-                val coursAndDate = cours["Début"]?.split("T")
-                val getCoursDate = coursAndDate?.get(0)
-                val getCoursHour = coursAndDate?.get(1)
-
-                if (getCoursDate != null){
-                    if (getCoursDate == currentDate){
-                        for (info in cours){
-                            // On ne prend pas l'id ni la date et heure de fin
-                            if (info.key != "id" && info.key != "Fin"){
-                                if (info.key == "Début"){
-                                    val formatDate = getCoursDate.split("-").reversed()
-                                    cardText += "Date : " + formatDate[0]+"/"+formatDate[1]+"/"+formatDate[2]
-                                    cardText += "Heure : " + getCoursHour
-                                }
-                                else{
-                                    cardText += info.key + " : " + info.value
-                                }
-                            }
-                            found = true
-                        }
-                        CardWithMultipleViews(cardText)
-                    }
-                    else if (currentDate < getCoursDate){
-                        lastCours++
-                    }
-                }
-
-            }
-        }
-
-*/
             for (cours in courseList){
                 var cardText:List<String> = listOf()
 
-                if (!cours.heureDebut.isNullOrEmpty()){
+                if (!cours.heureDebut.isNullOrEmpty() && !cours.dateDebut.isNullOrEmpty()){
 
-                    if (cours.dateDebut != null){
-                        println("CALENDAR==============")
-                        println("-"+cours.dateDebut)
-                        println(currentDate)
-                        println(cours.dateDebut == currentDate)
                         if (cours.dateDebut == currentDate){
 
                             /*println("PROPRIETE============")
@@ -121,10 +80,9 @@ fun Calendar(navController: NavHostController){
                             CardWithMultipleViews(cardText)
 
                         }
-                        else if (currentDate < cours.dateDebut){
+                        else if (currentDate < cours.dateDebut) {
                             lastCours++
                         }
-                    }
 
                 }
             }
@@ -148,30 +106,6 @@ fun Calendar(navController: NavHostController){
             CardWithMultipleViews(cardText)
         }
 
-/*
-        if (!found){
-            val cours = dataCalendar[lastCours]
-            val coursAndDate = cours["Début"]?.split("T")
-            val getCoursDate = coursAndDate?.get(0)
-            val getCoursHour = coursAndDate?.get(1)
-            var cardText:List<String> = listOf()
-            for (info in cours){
-                // On ne prend pas l'id ni la date et heure de fin
-                if (info.key != "id" && info.key != "Fin"){
-                    if (info.key == "Début"){
-                        val formatDate = getCoursDate?.split("-")?.reversed()
-                        cardText += "Date : " + (formatDate?.get(0)) +"/"+ (formatDate?.get(1)) +"/"+ (formatDate?.get(2))
-                        cardText += "Heure : " + getCoursHour
-                    }
-                    else{
-                        cardText += info.key + " : " + info.value
-                    }
-                }
-                found = true
-            }
-            CardWithMultipleViews(cardText)
-        }
-*/
         Spacer(modifier = Modifier.height(25.dp))
 
         calendarButton(baseText = "VOIR PLUS", navController = navController)
