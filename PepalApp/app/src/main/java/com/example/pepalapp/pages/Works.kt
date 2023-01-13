@@ -5,6 +5,7 @@ package com.example.pepalapp.pages
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -21,7 +22,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import classes.courseList
+import classes.rendersList
 import com.example.pepalapp.uifun.*
+import utils.removeOneDay
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -44,73 +48,47 @@ fun WorksScaffold(navController: NavHostController){
 fun Works(){
 
     TitleText("Rendus")
-    
-    Column(
+
+    LazyColumn(
         modifier = Modifier
-            .padding(15.dp)
-            .fillMaxSize(),
+            .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 40.dp)
+            .fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        val dateFormat = SimpleDateFormat("yyyy-M-dd")
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val currentDate = dateFormat.format(Date())
-        for (cours in dataWorks){
-            var cardText:List<String> = listOf()
-            if (cours["Début"]?.contains("T") == true){
-                val coursAndDate = cours["Début"]?.split("T")
-                val getCoursDate = coursAndDate?.get(0)
-                val getCoursHour = coursAndDate?.get(1)
 
-                if (getCoursDate != null){
-                    if (getCoursDate >= currentDate){
-                        for (info in cours){
-                            // On ne prend pas l'id ni la date et heure de fin
-                            if (info.key != "id" && info.key != "Salle" && info.key != "Début"){
-                                if (info.key == "Fin"){
-                                    val formatDate = getCoursDate.split("-").reversed()
-                                    cardText += "Date : " + formatDate[0]+"/"+formatDate[1]+"/"+formatDate[2]
-                                    cardText += "Heure : " + getCoursHour
-                                }
-                                else{
-                                    cardText += info.key + " : " + info.value
-                                }
-                            }
-                        }
-                        CardWithMultipleViews(cardText)
+
+        items(rendersList.size) { index ->
+            val render = rendersList[index]
+
+            var cardText:List<String> = listOf()
+
+            if (!render.heureDebut.isNullOrEmpty() && !render.dateDebut.isNullOrEmpty()){
+
+                // Pour les cours pas passé ou celui actuel
+                //if (render.dateDebut >= currentDate){
+                    cardText += "Matière : ${render.matiere}"
+                    if (!render.dateFin.isNullOrEmpty()){
+                        val formatDate = removeOneDay(render.dateFin)
+                        cardText += "Date : ${formatDate?.get(0)}/${formatDate?.get(1)}/${formatDate?.get(2)}"
                     }
-                }
+                    cardText += "Heure : 23:59"
+
+
+                        CardWithMultipleViews(cardText)
+
+
+               // }
 
             }
 
-
         }
-        println("=======TEST======")
-        //println(dateTest)
-
-
-
-        //val coursDate = sdf.format(dateTest)
-
-        //val date: LocalDate = LocalDate.parse(dateTest, DateTimeFormatter.ISO_DATE)
-        /*if (dateTest != null) {
-
-            println(dateTest < currentDate)
-        }*/
-        println(" C DATE is  "+currentDate)// + "cours " + coursDate)
-
-
 
     }
+
+
+
 }
-
-/* Tous les cours
-for (cours in dataCalendar){
-    var cardText:List<String> = listOf()
-    for (info in cours){
-        if (info.key != "id"){
-            cardText += info.key + " : " + info.value
-        }
-    }
-    CardWithMultipleViews(cardText)
-}*/

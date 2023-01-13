@@ -232,6 +232,13 @@ fun allCalendar(){
 
             val newList = prettyList(toList)
 
+            val debut = newList[9].split("T")
+            val fin = newList[11].split("T")
+            val heureDebut = debut.getOrNull(1)
+            val dateDebut = debut.getOrNull(0)
+            val heureFin = fin.getOrNull(1)
+            val dateFin = fin.getOrNull(0)
+
             // on l'ajoute à notre liste
             if (toList[3]?.contains("Rendu") == true){
                 println("RENDER====")
@@ -245,20 +252,20 @@ fun allCalendar(){
                     "Fin" to toList[11],
                 )
                 println(newList)
-                /*val materr = newList[3].split("-")[-1]
+                val matter = newList[3].split("-").last().substring(1)
                 val renderName = newList[3].split("-").dropLast(1).joinToString("-")
-                Render(newList[1],)*/
+                Render(newList[1].toInt(),matter,newList[5],heureDebut, dateDebut, heureFin, dateFin,
+                    rendersList)
 
                 dataWorks += listOf(coursDict) as MutableList<MutableMap<String, String>>
             }
             else{
                 // on crée le dictionnaire
 
-                val debut = newList[9].split("T")
-                val fin = newList[11].split("T")
+
 
                Course(newList[1].toInt(),newList[3],newList[5],newList[7],
-                    debut.getOrNull(1), debut.getOrNull(0), fin.getOrNull(1), fin.getOrNull(0),
+                   heureDebut, dateDebut, heureFin, dateFin,
                     courseList
                 )
 
@@ -266,6 +273,9 @@ fun allCalendar(){
 
         }
         courseList.sortBy { it.dateDebut }
+        for (render in rendersList){
+            render.toString()
+        }
 
 
     }.start()
