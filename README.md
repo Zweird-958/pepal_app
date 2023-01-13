@@ -7,3 +7,4 @@
 ✔ FIX CALENDAR
 ✔ FULL CALENDAR --> USE CLASS
 ❌ RENDUS
+❌ Fix Unicode
