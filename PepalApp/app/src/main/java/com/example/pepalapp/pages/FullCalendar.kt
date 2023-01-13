@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import classes.courseList
 import com.example.pepalapp.uifun.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -78,34 +79,23 @@ fun FullCalendar(){
             val currentDate = dateFormat.format(Date())
 
 
-            items(dataCalendar.size) { index ->
-                val cours = dataCalendar[index]
-                println(cours)
+            items(courseList.size) { index ->
+                val cours = courseList[index]
+
                 var cardText:List<String> = listOf()
 
-                if (cours["Début"]?.contains("T") == true){
+                if (!cours.heureDebut.isNullOrEmpty() && !cours.dateDebut.isNullOrEmpty()){
 
-                    val coursAndDate = cours["Début"]?.split("T")
-                    val getCoursDate = coursAndDate?.get(0)
-                    val getCoursHour = coursAndDate?.get(1)
-
-                    if (getCoursDate != null){
                         // Pour les cours pas passé ou celui actuel
-                        if (getCoursDate >= currentDate){
-                            for (info in cours){
-                                // On ne prend pas l'id ni la date et heure de fin
-                                if (info.key != "id" && info.key != "Fin"){
-                                    if (info.key == "Début"){
-                                        val formatDate = getCoursDate.split("-").reversed()
-                                        cardText += "Date : " + formatDate[0]+"/"+formatDate[1]+"/"+formatDate[2]
-                                        cardText += "Heure : " + getCoursHour
-                                    }
-                                    else{
-                                        cardText += info.key + " : " + info.value
-                                    }
-                                }
-                            }
-                            if (cours["Matière"] == "Entreprise"){
+                        if (cours.dateDebut >= currentDate){
+                            cardText += "Matière : ${cours.matiere}"
+                            cardText += "Intervenant : ${cours.intervenant}"
+                            cardText += "Salle : ${cours.salle}"
+                            val formatDate = cours.dateDebut.split("-").reversed()
+                            cardText += "Date : ${formatDate[0]}/${formatDate[1]}/${formatDate[2]}"
+                            cardText += "Heure : ${cours.heureDebut}"
+
+                            if (cours.matiere == "Entreprise"){
                                 if (showEntreprise.value){
                                     CardWithMultipleViews(cardText)
                                 }
@@ -115,14 +105,10 @@ fun FullCalendar(){
                             }
 
                         }
-                    }
+
                 }
 
             }
-
-            /*println(test)
-            println(compteur)*/
-            //test = mutableListOf()
 
         }
     }
