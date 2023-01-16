@@ -8,3 +8,4 @@
 ✔ FULL CALENDAR --> USE CLASS
 ❌ RENDUS
 ❌ Fix Unicode
+❌ Calendar Next Course
